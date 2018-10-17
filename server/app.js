@@ -5,7 +5,8 @@ const app = express();
 
 
 app.use('/graphql',graphqlHTTP({
-    schema
+    schema,
+    graphiql:true // We want  to use cms
 
 })) // Mildware when you come on this location they call method who know what todo, also you need schema. 
 app.listen(4000, ()=>{
