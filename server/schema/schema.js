@@ -10,9 +10,9 @@ const {
 
 //dummy data
 var books = [
-    {name:'Name of the wind', genre:'Fantasy',id:'1'},
-    {name:'Galactica', genre:'SC-Fi',id:'2'},
-    {name:'Police Academy', genre:'Comedy',id:'3'},
+    {name:'Name of the wind', genre:'Fantasy',id:'1', authorId:'1'},
+    {name:'Galactica', genre:'SC-Fi',id:'2', authorId:'2'},
+    {name:'Police Academy', genre:'Comedy',id:'3', authorId:'3'},
 ]
 
 var author = [
@@ -26,7 +26,14 @@ const BookType = new GraphQLObjectType({
     fields:()=>({
         id:{type: GraphQLID},
         name:{type:GraphQLString},
-        genre:{type:GraphQLString}
+        genre:{type:GraphQLString},
+        author:{
+            type:AuthorType,
+            resolve(parent,args){
+                console.log(parent)
+                return _.find(author, {id:parent.authorId})
+            }
+        }
     })
 })//We define book schema
 
